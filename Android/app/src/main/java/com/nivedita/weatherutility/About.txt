@@ -1,7 +1,0 @@
-The application architecture is as follows.
-
-Write all the models and Retrofit models and generate Dagger dependencies.
-
-Generating the dagger dependencies and graph during compile time.
-
-Write the components and Modules to generate the dagger dependencies.

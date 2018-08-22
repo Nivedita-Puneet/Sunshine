@@ -1,6 +1,6 @@
 package com.nivedita.sunshine.di.module;
 
-import com.nivedita.sunshine.model.network.WeatherService;
+import com.nivedita.sunshine.model.network.SunshineService;
 
 import javax.inject.Singleton;
 
@@ -16,8 +16,8 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    WeatherService provideWeatherServiceAPI() {
+    SunshineService provideWeatherServiceAPI() {
 
-        return WeatherService.CREATOR.getWeatherServiceAPI();
+        return SunshineService.CREATOR.getWeatherServiceAPI();
     }
 }

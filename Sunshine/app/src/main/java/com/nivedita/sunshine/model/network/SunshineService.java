@@ -16,7 +16,7 @@ import retrofit2.http.Query;
  * A retrofit class which returns an instance to get response from weather api.
  */
 
-public interface WeatherService {
+public interface SunshineService {
 
     @GET("daily")
     Flowable<Sunshine> getWeatherReport(@Query("q") String place,
@@ -29,12 +29,12 @@ public interface WeatherService {
 
     class CREATOR {
 
-        public static WeatherService getWeatherServiceAPI() {
+        public static SunshineService getWeatherServiceAPI() {
 
             Retrofit retrofit = new Retrofit.Builder().client(buildClient())
                     .addConverterFactory(GsonConverterFactory.create())
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create()).baseUrl(ConstantsUtil.BASE_URL).build();
-            return retrofit.create(WeatherService.class);
+            return retrofit.create(SunshineService.class);
         }
 
         private static OkHttpClient buildClient() {

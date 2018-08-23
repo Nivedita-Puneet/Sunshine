@@ -3,9 +3,11 @@ package com.nivedita.sunshine.di.component;
 import android.app.Application;
 import android.content.Context;
 
+import com.nivedita.sunshine.di.SunshineApplication;
 import com.nivedita.sunshine.di.module.ApplicationModule;
 import com.nivedita.sunshine.di.module.NetworkModule;
 import com.nivedita.sunshine.di.scope.ApplicationContext;
+import com.nivedita.sunshine.model.DataManager;
 
 import javax.inject.Singleton;
 
@@ -19,9 +21,11 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, NetworkModule.class})
 public interface ApplicationComponent {
 
+    void inject(SunshineApplication mApplication);
+
     Application application();
 
-    //DataManager dataManager();
+    DataManager dataManager();
 
     //SharedPrefsHelper getPreferenceHelper();
 

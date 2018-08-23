@@ -1,8 +1,14 @@
 package com.nivedita.sunshine.utility.rx;
 
+import io.reactivex.Scheduler;
+
 /**
- * Created by PUNEETU on 23-08-2018.
+ * Create an interface for scheduler provider
  */
 
-public class SchedulerProvider {
+public interface SchedulerProvider {
+
+    Scheduler ui();
+    Scheduler computation();
+    Scheduler io();
 }

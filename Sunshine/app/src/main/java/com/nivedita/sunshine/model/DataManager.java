@@ -2,21 +2,22 @@ package com.nivedita.sunshine.model;
 
 import android.content.SharedPreferences;
 
+import com.nivedita.sunshine.model.network.Apihelper;
 import com.nivedita.sunshine.model.network.SunshineService;
 import com.nivedita.sunshine.model.pojo.Sunshine;
+import com.nivedita.sunshine.model.prefs.PrefsHelper;
 import com.nivedita.sunshine.utility.ConstantsUtil;
 
-import javax.inject.Inject;
-
-import io.reactivex.Flowable;
 
 /**
- * Created by PUNEETU on 21-08-2018.
+ * Interface which defines all data related operations of application.
  */
 
-public class DataManager {
+public interface DataManager extends Apihelper, PrefsHelper {
 
-    private final SunshineService sunshineService;
+    void startSunshineActivity();
+
+    /*private final SunshineService sunshineService;
 
     private static final String TAG = DataManager.class.getSimpleName();
     private SharedPrefsHelper mSharedPrefsHelper;
@@ -49,7 +50,7 @@ public class DataManager {
 
     public SharedPreferences getSharedPreferences() {
         return mSharedPrefsHelper.getSharedPreferences();
-    }
+    }*/
 
 
 }

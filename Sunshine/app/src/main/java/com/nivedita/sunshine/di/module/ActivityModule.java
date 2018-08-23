@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.nivedita.sunshine.di.scope.ActivityContext;
+import com.nivedita.sunshine.utility.rx.AppSchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * The main module which defines dependencies for Main Activity.
@@ -35,5 +37,15 @@ public class ActivityModule {
     @Provides
     LinearLayoutManager linearLayoutManager() {
         return new LinearLayoutManager(activity);
+    }
+
+    @Provides
+    CompositeDisposable getCompositeDisposable() {
+        return new CompositeDisposable();
+    }
+
+    @Provides
+    AppSchedulerProvider getSchedulerProvider(){
+        return new AppSchedulerProvider();
     }
 }

@@ -3,6 +3,7 @@ package com.nivedita.sunshine.presenter;
 import com.nivedita.sunshine.model.DataManager;
 import com.nivedita.sunshine.model.network.LogNetworkError;
 import com.nivedita.sunshine.model.pojo.Sunshine;
+import com.nivedita.sunshine.utility.rx.SchedulerProvider;
 import com.nivedita.sunshine.view.SunshineView;
 
 import javax.inject.Inject;
@@ -22,55 +23,52 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
 
     private final DataManager mDataManager;
     private CompositeDisposable compositeDisposable;
+    private SchedulerProvider schedulerProvider;
 
     @Inject
-    public SunshinePresenter(DataManager mDataManager) {
+    public SunshinePresenter(DataManager mDataManager,
+                             SchedulerProvider schedulerProvider,
+                             CompositeDisposable compositeDisposable) {
+
         this.mDataManager = mDataManager;
+        this.schedulerProvider = schedulerProvider;
+        this.compositeDisposable = compositeDisposable;
     }
 
     @Override
     public void attachView(SunshineView sunshineView) {
-        super.attachView(sunshineView);
 
-        if (compositeDisposable == null) {
-            compositeDisposable = new CompositeDisposable();
-        }
+        super.attachView(sunshineView);
         compositeDisposable.add(getWeatherReports());
     }
 
     private Disposable getWeatherReports() {
 
-        return sendRequestToApiObservable().subscribe(new Consumer<Sunshine>() {
-            @Override
-            public void accept(Sunshine weatherReport) throws Exception {
+        return mDataManager.getDailyWeatherReports(mDataManager.getLocationDetails())
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui()).subscribe(new Consumer<Sunshine>() {
+                    @Override
+                    public void accept(Sunshine sunshine) throws Exception {
+                        getMvpView().showWait();
+                        if (!sunshine.getList().isEmpty()) {
+                            getMvpView().showDailyForecast(sunshine);
+                            getMvpView().removeWait();
 
-                getMvpView().showWait();
-                if (!weatherReport.getList().isEmpty()) {
-                    getMvpView().showDailyForecast(weatherReport);
-                    getMvpView().removeWait();
+                        } else {
+                            getMvpView().noWeatherReports();
+                            getMvpView().removeWait();
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().showError(new LogNetworkError(throwable));
+                    }
+                });
 
-                } else {
-                    getMvpView().noWeatherReports();
-                    getMvpView().removeWait();
-                }
-            }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-
-                getMvpView().showError(new LogNetworkError(throwable));
-            }
-        });
 
     }
 
-
-    private Flowable<Sunshine> sendRequestToApiObservable() {
-
-        String value = mDataManager.getDefaultLocation();
-        return mDataManager.getDailyWeatherReport(value).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
 
     @Override
     public void detachView() {

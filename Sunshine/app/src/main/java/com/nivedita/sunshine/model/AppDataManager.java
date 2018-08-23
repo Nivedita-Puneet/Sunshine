@@ -1,8 +1,54 @@
 package com.nivedita.sunshine.model;
 
-/**
- * Created by PUNEETU on 23-08-2018.
- */
+import android.content.Context;
 
-public class AppDataManager {
+import com.nivedita.sunshine.di.scope.ApplicationContext;
+import com.nivedita.sunshine.model.network.Apihelper;
+import com.nivedita.sunshine.model.pojo.Sunshine;
+import com.nivedita.sunshine.model.prefs.PrefsHelper;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import io.reactivex.Flowable;
+
+/**
+ * Class used to handle data intense operations.
+ */
+@Singleton
+public class AppDataManager implements DataManager {
+
+    private static final String TAG = AppDataManager.class.getSimpleName();
+
+    private final Context context;
+    private final PrefsHelper prefsHelper;
+    private final Apihelper apihelper;
+
+    @Inject
+    public AppDataManager(@ApplicationContext Context context, PrefsHelper prefsHelper, Apihelper apihelper) {
+
+        this.context = context;
+        this.prefsHelper = prefsHelper;
+        this.apihelper = apihelper;
+    }
+
+    @Override
+    public String getLocationDetails() {
+        return prefsHelper.getLocationDetails();
+    }
+
+    @Override
+    public void setLocationDetails(String place) {
+        prefsHelper.setLocationDetails(place);
+    }
+
+    @Override
+    public Flowable<Sunshine> getDailyWeatherReports(String place) {
+        return apihelper.getDailyWeatherReports(place);
+    }
+
+    @Override
+    public void startSunshineActivity() {
+
+    }
 }

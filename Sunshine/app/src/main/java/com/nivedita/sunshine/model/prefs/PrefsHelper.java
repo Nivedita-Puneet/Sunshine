@@ -1,8 +1,12 @@
 package com.nivedita.sunshine.model.prefs;
 
 /**
- * Created by PUNEETU on 23-08-2018.
+ * Interface which extracts the underlying implementation.
  */
 
 public interface PrefsHelper {
+
+    String getLocationDetails();
+
+    void setLocationDetails(String place);
 }

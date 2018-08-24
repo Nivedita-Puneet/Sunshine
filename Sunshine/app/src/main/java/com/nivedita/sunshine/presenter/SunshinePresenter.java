@@ -44,14 +44,14 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
 
     private Disposable getWeatherReports() {
 
-        return mDataManager.getDailyWeatherReports(mDataManager.getLocationDetails())
+        return mDataManager.getWeatherAPIReports("")
                 .subscribeOn(schedulerProvider.io())
                 .observeOn(schedulerProvider.ui()).subscribe(new Consumer<Sunshine>() {
                     @Override
                     public void accept(Sunshine sunshine) throws Exception {
                         getMvpView().showWait();
                         if (!sunshine.getList().isEmpty()) {
-                            getMvpView().showDailyForecast(sunshine);
+                            getMvpView().showDailyForecast(sunshine.getList());
                             getMvpView().removeWait();
 
                         } else {

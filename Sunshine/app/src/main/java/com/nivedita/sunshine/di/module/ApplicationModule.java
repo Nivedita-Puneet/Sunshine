@@ -42,12 +42,13 @@ public class ApplicationModule {
         return mApplication;
     }
 
-   /* @Provides
-    SharedPreferences provideSharedPreferences() {
-        return mApplication.getSharedPreferences(ConstantsUtil.WEATHERSHAREDPREFS, Context.MODE_PRIVATE);
-    }*/
-
     @Provides
+    SharedPreferences provideSharedPrefs(){
+        return mApplication.getSharedPreferences(ConstantsUtil.WEATHERSHAREDPREFS, Context.MODE_PRIVATE);
+    }
+
+
+    /*@Provides
     @Singleton
     PrefsHelper provideAppPrefsHelper(Apppreferenceshelper apppreferenceshelper) {
         return apppreferenceshelper;
@@ -63,7 +64,7 @@ public class ApplicationModule {
     @Singleton
     DataManager provideAppDataManager(AppDataManager appDataManager) {
         return appDataManager;
-    }
+    }*/
 }
 
 

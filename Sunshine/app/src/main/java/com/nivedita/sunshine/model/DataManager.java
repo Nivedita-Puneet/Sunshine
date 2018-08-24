@@ -3,54 +3,45 @@ package com.nivedita.sunshine.model;
 import android.content.SharedPreferences;
 
 import com.nivedita.sunshine.model.network.Apihelper;
+import com.nivedita.sunshine.model.network.SunshineAPiHelper;
 import com.nivedita.sunshine.model.network.SunshineService;
 import com.nivedita.sunshine.model.pojo.Sunshine;
 import com.nivedita.sunshine.model.prefs.PrefsHelper;
 import com.nivedita.sunshine.utility.ConstantsUtil;
+
+import javax.inject.Inject;
+
+import io.reactivex.Flowable;
 
 
 /**
  * Interface which defines all data related operations of application.
  */
 
-public interface DataManager extends Apihelper, PrefsHelper {
+public class DataManager {
 
-    void startSunshineActivity();
-
-    /*private final SunshineService sunshineService;
-
-    private static final String TAG = DataManager.class.getSimpleName();
-    private SharedPrefsHelper mSharedPrefsHelper;
+    private SharedPrefsHelper sharedPrefsHelper;
+    private SunshineAPiHelper sunshineAPiHelper;
 
     @Inject
-    public DataManager(SunshineService sunshineService, SharedPrefsHelper mSharedPrefsHelper) {
-        this.sunshineService = sunshineService;
-        this.mSharedPrefsHelper = mSharedPrefsHelper;
-    }
+    public DataManager(SharedPrefsHelper sharedPrefsHelper, SunshineAPiHelper sunshineAPiHelper) {
 
-    public Flowable<Sunshine> getDailyWeatherReport(String place) {
-
-
-        return sunshineService.getWeatherReport(place,
-                Integer.toString(ConstantsUtil.COUNT),
-                ConstantsUtil.UNITS,
-                ConstantsUtil.FORMAT_PARAM,
-                ConstantsUtil.WEATHER_API_KEY);
-
-    }
-
-    public void storeLocationDetails(String location) {
-        mSharedPrefsHelper.put(ConstantsUtil.LOCATION_KEY, location);
+        this.sharedPrefsHelper = sharedPrefsHelper;
+        this.sunshineAPiHelper = sunshineAPiHelper;
     }
 
     public String getDefaultLocation() {
 
-        return mSharedPrefsHelper.get(ConstantsUtil.LOCATION_KEY, ConstantsUtil.DEFAULT_LOCATION);
+        return sharedPrefsHelper.get(ConstantsUtil.LOCATION_KEY, ConstantsUtil.DEFAULT_LOCATION);
     }
 
-    public SharedPreferences getSharedPreferences() {
-        return mSharedPrefsHelper.getSharedPreferences();
-    }*/
+    public Flowable<Sunshine> getWeatherAPIReports(String place) {
 
+        return sunshineAPiHelper.getDailyWeatherReports(this.getDefaultLocation());
+    }
 
+    public void setDefaultLocationDetails(String place){
+
+        sharedPrefsHelper.put(ConstantsUtil.LOCATION_KEY, place);
+    }
 }

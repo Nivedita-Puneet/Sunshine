@@ -12,7 +12,7 @@ import io.reactivex.Flowable;
  * Created by PUNEETU on 23-08-2018.
  */
 @Singleton
-public class SunshineAPiHelper implements Apihelper {
+public class SunshineAPiHelper {
 
     private final SunshineService sunshineService;
 
@@ -21,7 +21,6 @@ public class SunshineAPiHelper implements Apihelper {
         this.sunshineService = sunshineService;
     }
 
-    @Override
     public Flowable<Sunshine> getDailyWeatherReports(String place) {
 
         return sunshineService.getWeatherReport(place,

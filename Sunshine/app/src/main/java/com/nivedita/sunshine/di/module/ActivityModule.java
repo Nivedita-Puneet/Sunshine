@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.nivedita.sunshine.di.scope.ActivityContext;
+import com.nivedita.sunshine.di.scope.PerActivity;
+import com.nivedita.sunshine.presenter.SunshinePresenter;
 import com.nivedita.sunshine.utility.rx.AppSchedulerProvider;
+import com.nivedita.sunshine.utility.rx.SchedulerProvider;
 
 import dagger.Module;
 import dagger.Provides;
@@ -45,7 +48,7 @@ public class ActivityModule {
     }
 
     @Provides
-    AppSchedulerProvider getSchedulerProvider(){
+    SchedulerProvider provideSchedulerProvider() {
         return new AppSchedulerProvider();
     }
 }

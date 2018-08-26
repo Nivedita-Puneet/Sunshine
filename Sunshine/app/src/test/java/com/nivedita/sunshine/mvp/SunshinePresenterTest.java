@@ -41,6 +41,8 @@ public class SunshinePresenterTest {
 
     Sunshine sunshine;
 
+    CompositeDisposable compositeDisposable;
+
     @BeforeClass
     public static void onlyOnce() throws Exception {
     }
@@ -48,7 +50,7 @@ public class SunshinePresenterTest {
     @Before
     public void setUp() throws Exception {
 
-        CompositeDisposable compositeDisposable = new CompositeDisposable();
+        compositeDisposable = new CompositeDisposable();
         mTestScheduler = new TestScheduler();
         sunshine = new Sunshine();
 
@@ -64,7 +66,9 @@ public class SunshinePresenterTest {
 
         Sunshine sunshine = new Sunshine();
         List<WeatherList> weatherReports = sunshine.getList();
-        doReturn(Flowable.just(sunshine.getList())).when(mDataManager).getWeatherAPIReports("Sydney");
+        doReturn(Flowable.just(sunshine)).when(mDataManager).getWeatherAPIReports("Sydney");
+
+        sunshinePresenter.onPageLoad();
 
         mTestScheduler.triggerActions();
         verify(sunshineView).showWait();

@@ -10,6 +10,7 @@ import com.nivedita.sunshine.model.prefs.PrefsHelper;
 import com.nivedita.sunshine.utility.ConstantsUtil;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Flowable;
 
@@ -17,7 +18,7 @@ import io.reactivex.Flowable;
 /**
  * Interface which defines all data related operations of application.
  */
-
+@Singleton
 public class DataManager {
 
     private SharedPrefsHelper sharedPrefsHelper;

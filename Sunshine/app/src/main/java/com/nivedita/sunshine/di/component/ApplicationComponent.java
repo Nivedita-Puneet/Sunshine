@@ -8,6 +8,7 @@ import com.nivedita.sunshine.di.module.ApplicationModule;
 import com.nivedita.sunshine.di.module.NetworkModule;
 import com.nivedita.sunshine.di.scope.ApplicationContext;
 import com.nivedita.sunshine.model.DataManager;
+import com.nivedita.sunshine.model.SharedPrefsHelper;
 
 import javax.inject.Singleton;
 
@@ -25,9 +26,9 @@ public interface ApplicationComponent {
 
     Application application();
 
-    DataManager dataManager();
+    DataManager getDataManager();
 
-    //SharedPrefsHelper getPreferenceHelper();
+    SharedPrefsHelper getPreferenceHelper();
 
     @ApplicationContext
     Context context();

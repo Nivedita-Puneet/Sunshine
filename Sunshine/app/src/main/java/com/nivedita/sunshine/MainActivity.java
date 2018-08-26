@@ -44,6 +44,11 @@ public class MainActivity extends BaseActivity implements SunshineView {
         sunshinePresenter.attachView(this);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        sunshinePresenter.onPageLoad();
+    }
 
     @Override
     public void showDailyForecast(List<WeatherList> sunshine) {

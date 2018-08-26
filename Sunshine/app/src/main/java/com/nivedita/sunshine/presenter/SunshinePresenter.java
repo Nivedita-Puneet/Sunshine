@@ -1,5 +1,7 @@
 package com.nivedita.sunshine.presenter;
 
+import android.util.Log;
+
 import com.nivedita.sunshine.model.DataManager;
 import com.nivedita.sunshine.model.network.LogNetworkError;
 import com.nivedita.sunshine.model.pojo.Sunshine;
@@ -25,6 +27,8 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
     private CompositeDisposable compositeDisposable;
     private SchedulerProvider schedulerProvider;
 
+    private static final String TAG = SunshinePresenter.class.getSimpleName();
+
     @Inject
     public SunshinePresenter(DataManager mDataManager,
                              SchedulerProvider schedulerProvider,
@@ -39,6 +43,9 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
     public void attachView(SunshineView sunshineView) {
 
         super.attachView(sunshineView);
+    }
+
+    public void onPageLoad() {
         compositeDisposable.add(getWeatherReports());
     }
 
@@ -52,6 +59,7 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
                         getMvpView().showWait();
                         if (!sunshine.getList().isEmpty()) {
                             getMvpView().showDailyForecast(sunshine.getList());
+                            Log.i(TAG, sunshine.getList().get(0).getTemp().toString());
                             getMvpView().removeWait();
 
                         } else {
@@ -74,7 +82,7 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
     public void detachView() {
         super.detachView();
         if (compositeDisposable != null) {
-            compositeDisposable.clear();
+            compositeDisposable.dispose();
         }
     }
 

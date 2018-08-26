@@ -3,11 +3,12 @@ package com.nivedita.sunshine.model;
 import android.content.SharedPreferences;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Helper class to access shared preferences of application.
  */
-
+@Singleton
 public class SharedPrefsHelper {
 
     private SharedPreferences mSharedPreferences;

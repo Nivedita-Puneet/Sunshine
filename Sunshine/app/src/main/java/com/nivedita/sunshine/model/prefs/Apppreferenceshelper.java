@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import com.nivedita.sunshine.di.scope.ApplicationContext;
+import com.nivedita.sunshine.di.scope.PreferenceInfo;
 import com.nivedita.sunshine.utility.ConstantsUtil;
 
 import javax.inject.Inject;
@@ -18,9 +19,10 @@ public class Apppreferenceshelper implements PrefsHelper {
     private final SharedPreferences mPrefs;
 
     @Inject
-    public Apppreferenceshelper(@ApplicationContext Context context){
+    public Apppreferenceshelper(@ApplicationContext Context context,
+                                @PreferenceInfo String prefFileName){
 
-        mPrefs = context.getSharedPreferences("Sunshineprefs", Context.MODE_PRIVATE);
+        mPrefs = context.getSharedPreferences(prefFileName, Context.MODE_PRIVATE);
     }
     @Override
     public String getLocationDetails() {
@@ -30,6 +32,6 @@ public class Apppreferenceshelper implements PrefsHelper {
     @Override
     public void setLocationDetails(String place) {
 
-        mPrefs.edit().putString(ConstantsUtil.LOCATION_KEY, place);
+        mPrefs.edit().putString(ConstantsUtil.LOCATION_KEY, place).apply();
     }
 }

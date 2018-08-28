@@ -16,10 +16,5 @@ public interface SunshineView extends MVPView {
 
     void noWeatherReports();
 
-    void showError(LogNetworkError logNetworkError);
-
-    void showWait();
-
-    void removeWait();
 
 }

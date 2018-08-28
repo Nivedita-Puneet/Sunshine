@@ -6,6 +6,7 @@ import com.nivedita.sunshine.model.DataManager;
 import com.nivedita.sunshine.model.network.LogNetworkError;
 import com.nivedita.sunshine.model.pojo.Sunshine;
 import com.nivedita.sunshine.utility.rx.SchedulerProvider;
+import com.nivedita.sunshine.view.MVPView;
 import com.nivedita.sunshine.view.SunshineView;
 
 import javax.inject.Inject;
@@ -21,11 +22,9 @@ import io.reactivex.schedulers.Schedulers;
  * The presenter class for main activity
  */
 
-public class SunshinePresenter extends BasePresenter<SunshineView> {
+public class SunshinePresenter<T extends SunshineView> extends BasePresenter<T>
+        implements SunshineBasePresenter<T> {
 
-    private final DataManager mDataManager;
-    private CompositeDisposable compositeDisposable;
-    private SchedulerProvider schedulerProvider;
 
     private static final String TAG = SunshinePresenter.class.getSimpleName();
 
@@ -34,29 +33,19 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
                              SchedulerProvider schedulerProvider,
                              CompositeDisposable compositeDisposable) {
 
-        this.mDataManager = mDataManager;
-        this.schedulerProvider = schedulerProvider;
-        this.compositeDisposable = compositeDisposable;
-    }
-
-    @Override
-    public void attachView(SunshineView sunshineView) {
-
-        super.attachView(sunshineView);
-    }
-
-    public void onPageLoad() {
-        compositeDisposable.add(getWeatherReports());
+        super(mDataManager, schedulerProvider, compositeDisposable);
     }
 
     private Disposable getWeatherReports() {
 
-        return mDataManager.getWeatherAPIReports("")
-                .subscribeOn(schedulerProvider.io())
-                .observeOn(schedulerProvider.ui()).subscribe(new Consumer<Sunshine>() {
+        getMvpView().showWait();
+
+        return getDataManager().getDailyWeatherReports("Sydney")
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui()).subscribe(new Consumer<Sunshine>() {
                     @Override
                     public void accept(Sunshine sunshine) throws Exception {
-                        getMvpView().showWait();
+
                         if (!sunshine.getList().isEmpty()) {
                             getMvpView().showDailyForecast(sunshine.getList());
                             Log.i(TAG, sunshine.getList().get(0).getTemp().toString());
@@ -73,18 +62,11 @@ public class SunshinePresenter extends BasePresenter<SunshineView> {
                         getMvpView().showError(new LogNetworkError(throwable));
                     }
                 });
-
-
     }
 
 
     @Override
-    public void detachView() {
-        super.detachView();
-        if (compositeDisposable != null) {
-            compositeDisposable.dispose();
-        }
+    public void onViewInitialized() {
+        getCompositeDisposable().add(getWeatherReports());
     }
-
-
 }

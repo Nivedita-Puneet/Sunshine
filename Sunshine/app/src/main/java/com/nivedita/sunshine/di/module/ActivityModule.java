@@ -6,9 +6,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.nivedita.sunshine.di.scope.ActivityContext;
 import com.nivedita.sunshine.di.scope.PerActivity;
 import com.nivedita.sunshine.model.network.SunshineService;
+import com.nivedita.sunshine.model.pojo.Sunshine;
+import com.nivedita.sunshine.presenter.SunshineBasePresenter;
 import com.nivedita.sunshine.presenter.SunshinePresenter;
 import com.nivedita.sunshine.utility.rx.AppSchedulerProvider;
 import com.nivedita.sunshine.utility.rx.SchedulerProvider;
+import com.nivedita.sunshine.view.SunshineView;
 
 import javax.inject.Singleton;
 
@@ -53,6 +56,12 @@ public class ActivityModule {
     @Provides
     SchedulerProvider provideSchedulerProvider() {
         return new AppSchedulerProvider();
+    }
+
+    @Provides
+    @PerActivity
+    SunshineBasePresenter<SunshineView> provideSunshinePresenter(SunshinePresenter<SunshineView> sunshinePresenter){
+        return sunshinePresenter;
     }
 
 }

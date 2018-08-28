@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.nivedita.sunshine.di.scope.ApplicationContext;
+import com.nivedita.sunshine.di.scope.PreferenceInfo;
 import com.nivedita.sunshine.model.AppDataManager;
 import com.nivedita.sunshine.model.DataManager;
 import com.nivedita.sunshine.model.SharedPrefsHelper;
@@ -38,33 +39,35 @@ public class ApplicationModule {
     }
 
     @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return ConstantsUtil.WEATHERSHAREDPREFS;
+    }
+
+
+    @Provides
     @ApplicationContext
     Context provideApplicationContext() {
         return mApplication;
     }
 
     @Provides
-    SharedPreferences provideSharedPrefs(){
-        return mApplication.getSharedPreferences(ConstantsUtil.WEATHERSHAREDPREFS, Context.MODE_PRIVATE);
-    }
-
-   /* @Provides
     @Singleton
-    DataManager getDataManager(DataManager dataManager){
+    DataManager getDataManager(AppDataManager dataManager){
         return dataManager;
     }
 
     @Provides
     @Singleton
-    SunshineAPiHelper getSunShineAPIHelper(SunshineAPiHelper sunshineAPiHelper){
+    Apihelper getSunShineAPIHelper(SunshineAPiHelper sunshineAPiHelper){
         return sunshineAPiHelper;
     }
 
     @Provides
     @Singleton
-    SharedPrefsHelper getSharedPrefsHelper(SharedPrefsHelper sharedPrefsHelper){
+    PrefsHelper getSharedPrefsHelper(Apppreferenceshelper sharedPrefsHelper){
         return sharedPrefsHelper;
-    }*/
+    }
 }
 
 

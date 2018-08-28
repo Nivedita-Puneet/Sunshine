@@ -9,10 +9,10 @@ import javax.inject.Singleton;
 import io.reactivex.Flowable;
 
 /**
- * Created by PUNEETU on 23-08-2018.
+ * Class used to get response from rest service.
  */
 @Singleton
-public class SunshineAPiHelper {
+public class SunshineAPiHelper implements Apihelper{
 
     private final SunshineService sunshineService;
 
@@ -21,6 +21,7 @@ public class SunshineAPiHelper {
         this.sunshineService = sunshineService;
     }
 
+    @Override
     public Flowable<Sunshine> getDailyWeatherReports(String place) {
 
         return sunshineService.getWeatherReport(place,

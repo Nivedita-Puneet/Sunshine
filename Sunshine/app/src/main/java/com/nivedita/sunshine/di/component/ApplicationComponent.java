@@ -28,8 +28,6 @@ public interface ApplicationComponent {
 
     DataManager getDataManager();
 
-    SharedPrefsHelper getPreferenceHelper();
-
     @ApplicationContext
     Context context();
 

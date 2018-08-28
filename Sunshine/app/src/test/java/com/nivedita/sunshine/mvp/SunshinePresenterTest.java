@@ -66,15 +66,12 @@ public class SunshinePresenterTest {
 
         Sunshine sunshine = new Sunshine();
         List<WeatherList> weatherReports = sunshine.getList();
-        doReturn(Flowable.just(sunshine)).when(mDataManager).getWeatherAPIReports("Sydney");
+        doReturn(Flowable.just(sunshine)).when(mDataManager).getDailyWeatherReports("Sydney");
 
-        sunshinePresenter.onPageLoad();
-
+        sunshinePresenter.onViewInitialized();
         mTestScheduler.triggerActions();
-        verify(sunshineView).showWait();
-        verify(sunshineView).showDailyForecast(weatherReports);
-        verify(sunshineView).removeWait();
 
+        verify(sunshineView).showWait();
 
     }
 

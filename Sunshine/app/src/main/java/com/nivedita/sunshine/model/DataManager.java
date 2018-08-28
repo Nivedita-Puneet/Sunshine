@@ -19,9 +19,11 @@ import io.reactivex.Flowable;
  * Interface which defines all data related operations of application.
  */
 @Singleton
-public class DataManager {
+public interface DataManager extends Apihelper,PrefsHelper {
 
-    private SharedPrefsHelper sharedPrefsHelper;
+    public void onPageLoad();
+
+   /* private SharedPrefsHelper sharedPrefsHelper;
     private SunshineAPiHelper sunshineAPiHelper;
 
     @Inject
@@ -44,5 +46,5 @@ public class DataManager {
     public void setDefaultLocationDetails(String place){
 
         sharedPrefsHelper.put(ConstantsUtil.LOCATION_KEY, place);
-    }
+    }*/
 }

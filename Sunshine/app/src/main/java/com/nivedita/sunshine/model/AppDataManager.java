@@ -16,7 +16,7 @@ import io.reactivex.Flowable;
  * Class used to handle data intense operations.
  */
 @Singleton
-public class AppDataManager {
+public class AppDataManager implements DataManager {
 
     private static final String TAG = AppDataManager.class.getSimpleName();
 
@@ -25,7 +25,8 @@ public class AppDataManager {
     private final Apihelper apihelper;
 
     @Inject
-    public AppDataManager(@ApplicationContext Context context, PrefsHelper prefsHelper, Apihelper apihelper) {
+    public AppDataManager(@ApplicationContext Context context,
+                          PrefsHelper prefsHelper, Apihelper apihelper) {
 
         this.context = context;
         this.prefsHelper = prefsHelper;
@@ -45,10 +46,15 @@ public class AppDataManager {
     public Flowable<Sunshine> getDailyWeatherReports(String place) {
 
         String location = this.getLocationDetails();
-        return apihelper.getDailyWeatherReports(location);
+        return apihelper.getDailyWeatherReports(place);
     }
 
     public void startSunshineActivity() {
+
+    }
+
+    @Override
+    public void onPageLoad() {
 
     }
 }

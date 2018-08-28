@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.nivedita.sunshine.model.network.LogNetworkError;
 import com.nivedita.sunshine.model.pojo.WeatherList;
+import com.nivedita.sunshine.presenter.SunshineBasePresenter;
 import com.nivedita.sunshine.presenter.SunshinePresenter;
 import com.nivedita.sunshine.utility.rx.SchedulerProvider;
 import com.nivedita.sunshine.view.SunshineView;
@@ -21,13 +22,7 @@ public class MainActivity extends BaseActivity implements SunshineView {
     RecyclerView recyclerView;
 
     @Inject
-    CompositeDisposable compositeDisposable;
-
-    @Inject
-    SchedulerProvider schedulerProvider;
-
-    @Inject
-    SunshinePresenter sunshinePresenter;
+    SunshineBasePresenter<SunshineView> sunshinePresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +42,7 @@ public class MainActivity extends BaseActivity implements SunshineView {
     @Override
     public void onStart() {
         super.onStart();
-        sunshinePresenter.onPageLoad();
+        sunshinePresenter.onViewInitialized();
     }
 
     @Override

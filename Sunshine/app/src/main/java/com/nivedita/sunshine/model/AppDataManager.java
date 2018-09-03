@@ -1,6 +1,7 @@
 package com.nivedita.sunshine.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.nivedita.sunshine.di.scope.ApplicationContext;
 import com.nivedita.sunshine.model.network.Apihelper;
@@ -46,6 +47,7 @@ public class AppDataManager implements DataManager {
     public Flowable<Sunshine> getDailyWeatherReports(String place) {
 
         String location = this.getLocationDetails();
+        Log.i(TAG, location);
         return apihelper.getDailyWeatherReports(place);
     }
 

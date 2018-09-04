@@ -62,11 +62,12 @@ public class SunshinePresenterTest {
     }
 
     @Test
-    public void fetchWeatherDetailsList(){
+    public void fetchWeatherDetailsList() {
 
         Sunshine sunshine = new Sunshine();
         List<WeatherList> weatherReports = sunshine.getList();
-        doReturn(Flowable.just(sunshine)).when(mDataManager).getDailyWeatherReports("Sydney");
+        String location = mDataManager.getLocationDetails();
+        doReturn(Flowable.just(sunshine)).when(mDataManager).getDailyWeatherReports(location);
 
         sunshinePresenter.onViewInitialized();
         mTestScheduler.triggerActions();

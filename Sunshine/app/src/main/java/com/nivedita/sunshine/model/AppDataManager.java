@@ -36,7 +36,9 @@ public class AppDataManager implements DataManager {
 
 
     public String getLocationDetails() {
-        return prefsHelper.getLocationDetails();
+        String locationDetails = prefsHelper.getLocationDetails();
+        Log.i(TAG, "The location details obtained are" + locationDetails);
+        return locationDetails;
     }
 
 
@@ -45,9 +47,7 @@ public class AppDataManager implements DataManager {
     }
 
     public Flowable<Sunshine> getDailyWeatherReports(String place) {
-
-        String location = this.getLocationDetails();
-        Log.i(TAG, location);
+       // Log.i(TAG, location);
         return apihelper.getDailyWeatherReports(place);
     }
 

@@ -11,8 +11,6 @@ import com.nivedita.sunshine.view.SunshineView;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
@@ -40,7 +38,7 @@ public class SunshinePresenter<T extends SunshineView> extends BasePresenter<T>
 
         getMvpView().showWait();
 
-        return getDataManager().getDailyWeatherReports("Sydney")
+        return getDataManager().getDailyWeatherReports(getDataManager().getLocationDetails())
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui()).subscribe(new Consumer<Sunshine>() {
                     @Override

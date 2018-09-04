@@ -26,7 +26,8 @@ public class Apppreferenceshelper implements PrefsHelper {
     }
     @Override
     public String getLocationDetails() {
-        return mPrefs.getString(ConstantsUtil.DEFAULT_LOCATION, null);
+        String defaultLocation = mPrefs.getString(ConstantsUtil.LOCATION_KEY, ConstantsUtil.DEFAULT_LOCATION);
+        return defaultLocation;
     }
 
     @Override

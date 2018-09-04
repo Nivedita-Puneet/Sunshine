@@ -45,7 +45,7 @@ public class ActivityModule {
 
     @Provides
     LinearLayoutManager linearLayoutManager() {
-        return new LinearLayoutManager(activity);
+        return new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false);
     }
 
     @Provides

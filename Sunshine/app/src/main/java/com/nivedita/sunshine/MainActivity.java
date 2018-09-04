@@ -3,6 +3,7 @@ package com.nivedita.sunshine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -27,6 +28,9 @@ public class MainActivity extends BaseActivity implements SunshineView {
     ProgressBar progressBar;
 
     SunshineAdapter sunshineAdapter;
+
+    @Inject
+    LinearLayoutManager linearLayoutManager;
 
     /*Array list to process the input data and process it.*/
     List<String> weatherForecast;
@@ -58,6 +62,9 @@ public class MainActivity extends BaseActivity implements SunshineView {
 
             }
         });
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(sunshineAdapter);
     }
 
     @Override

@@ -22,6 +22,16 @@ configurations.all {
     resolutionStrategy.force 'com.android.support:support-annotations:23.1.0'
 }
 
+
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+greendao {
+    schemaVersion 1
+}
+
+
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -51,6 +61,10 @@ dependencies {
 
     /*Add dependencies for recyclerview*/
     compile 'com.android.support:recyclerview-v7:26.1.0'
+
+    /*Dependencies for GREEN DAO sqlite*/
+    implementation 'org.greenrobot:greendao:3.2.2'
+
 
 
 

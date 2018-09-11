@@ -6,10 +6,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 import com.nivedita.sunshine.di.scope.ApplicationContext;
+import com.nivedita.sunshine.di.scope.DatabaseInfo;
 import com.nivedita.sunshine.di.scope.PreferenceInfo;
 import com.nivedita.sunshine.model.AppDataManager;
 import com.nivedita.sunshine.model.DataManager;
 import com.nivedita.sunshine.model.SharedPrefsHelper;
+import com.nivedita.sunshine.model.db.AppDBHelper;
+import com.nivedita.sunshine.model.db.DBHelper;
 import com.nivedita.sunshine.model.network.Apihelper;
 import com.nivedita.sunshine.model.network.SunshineAPiHelper;
 import com.nivedita.sunshine.model.prefs.Apppreferenceshelper;
@@ -67,6 +70,18 @@ public class ApplicationModule {
     @Singleton
     PrefsHelper getSharedPrefsHelper(Apppreferenceshelper sharedPrefsHelper){
         return sharedPrefsHelper;
+    }
+
+    @Provides
+    @DatabaseInfo
+    String provideDatabaseName() {
+        return ConstantsUtil.DB_NAME;
+    }
+
+    @Provides
+    @Singleton
+    DBHelper provideDbHelper(AppDBHelper appDbHelper) {
+        return appDbHelper;
     }
 }
 

@@ -7,8 +7,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.nivedita.sunshine.model.network.LogNetworkError;
+import com.nivedita.sunshine.model.pojo.Sunshine;
 import com.nivedita.sunshine.model.pojo.WeatherList;
 import com.nivedita.sunshine.presenter.SunshineBasePresenter;
 import com.nivedita.sunshine.utility.DataProcessUtil;
@@ -71,6 +73,7 @@ public class MainActivity extends BaseActivity implements SunshineView {
     public void onStart() {
         super.onStart();
         sunshinePresenter.onViewInitialized();
+        //sunshinePresenter.persistWeatherDetails();
     }
 
     @Override
@@ -119,8 +122,18 @@ public class MainActivity extends BaseActivity implements SunshineView {
     }
 
     @Override
+    public void insertSunshine(Sunshine sunshine) {
+
+    }
+
+
+    @Override
     public void showError(LogNetworkError logNetworkError) {
 
+        if (logNetworkError.getAppErrorMessage() == LogNetworkError.NETWORK_ERROR_MESSAGE) {
+
+        }
+        Toast.makeText(MainActivity.this, logNetworkError.getAppErrorMessage(), Toast.LENGTH_LONG).show();
     }
 
     @Override

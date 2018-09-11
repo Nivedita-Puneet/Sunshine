@@ -13,7 +13,7 @@
  * limitations under the License
  */
 
-package com.mindorks.framework.mvp.di;
+package com.nivedita.sunshine.di.scope;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -21,7 +21,7 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * Created by janisharali on 27/01/17.
+ * Defines scope for DB
  */
 
 @Qualifier

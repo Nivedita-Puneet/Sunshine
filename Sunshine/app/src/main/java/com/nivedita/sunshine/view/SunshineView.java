@@ -16,5 +16,7 @@ public interface SunshineView extends MVPView {
 
     void noWeatherReports();
 
+    void insertSunshine(Sunshine sunshine);
+
 
 }

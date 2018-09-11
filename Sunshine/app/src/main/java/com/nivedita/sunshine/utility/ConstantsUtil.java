@@ -27,4 +27,5 @@ public class ConstantsUtil {
 
     public static final String DEFAULT_LOCATION = "Sydney";
 
+    public static final String DB_NAME = "sunshine.db";
 }

@@ -2,6 +2,7 @@ package com.nivedita.sunshine.model;
 
 import android.content.SharedPreferences;
 
+import com.nivedita.sunshine.model.db.DBHelper;
 import com.nivedita.sunshine.model.network.Apihelper;
 import com.nivedita.sunshine.model.network.SunshineAPiHelper;
 import com.nivedita.sunshine.model.network.SunshineService;
@@ -19,7 +20,7 @@ import io.reactivex.Flowable;
  * Interface which defines all data related operations of application.
  */
 @Singleton
-public interface DataManager extends Apihelper,PrefsHelper {
+public interface DataManager extends Apihelper,PrefsHelper, DBHelper{
 
     public void onPageLoad();
 

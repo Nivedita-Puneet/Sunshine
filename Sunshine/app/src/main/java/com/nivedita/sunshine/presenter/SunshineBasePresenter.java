@@ -1,6 +1,7 @@
 package com.nivedita.sunshine.presenter;
 
 import com.nivedita.sunshine.di.scope.PerActivity;
+import com.nivedita.sunshine.model.pojo.Sunshine;
 import com.nivedita.sunshine.view.MVPView;
 import com.nivedita.sunshine.view.SunshineView;
 
@@ -12,4 +13,6 @@ import com.nivedita.sunshine.view.SunshineView;
 public interface SunshineBasePresenter<T extends SunshineView> extends Presenter<T> {
 
     void onViewInitialized();
+
+    void persistWeatherDetails(Sunshine sunshine);
 }

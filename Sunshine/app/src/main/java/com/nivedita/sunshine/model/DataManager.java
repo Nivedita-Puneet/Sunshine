@@ -23,6 +23,7 @@ public interface DataManager extends Apihelper,PrefsHelper {
 
     public void onPageLoad();
 
+
    /* private SharedPrefsHelper sharedPrefsHelper;
     private SunshineAPiHelper sunshineAPiHelper;
 
@@ -47,4 +48,6 @@ public interface DataManager extends Apihelper,PrefsHelper {
 
         sharedPrefsHelper.put(ConstantsUtil.LOCATION_KEY, place);
     }*/
+
+   //TODO: define database module required to store the sunshine utils from rest api.
 }

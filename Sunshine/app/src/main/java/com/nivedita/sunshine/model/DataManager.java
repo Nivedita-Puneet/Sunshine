@@ -20,7 +20,7 @@ import io.reactivex.Flowable;
  * Interface which defines all data related operations of application.
  */
 @Singleton
-public interface DataManager extends Apihelper,PrefsHelper, DBHelper{
+public interface DataManager extends Apihelper,PrefsHelper{
 
     public void onPageLoad();
 

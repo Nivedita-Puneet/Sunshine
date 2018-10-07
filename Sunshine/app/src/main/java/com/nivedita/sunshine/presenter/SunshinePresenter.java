@@ -74,7 +74,9 @@ public class SunshinePresenter<T extends SunshineView> extends BasePresenter<T>
 
     @Override
     public void persistWeatherDetails(Sunshine sunshine) {
-        getCompositeDisposable().add(getDataManager().persistSunshine(sunshine)
+
+        //TODO: Have to persist the weather details into the database and load it when there is no internet connection.
+       /* getCompositeDisposable().add(getDataManager().persistSunshine(sunshine)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(new Consumer<Long>() {
@@ -89,6 +91,6 @@ public class SunshinePresenter<T extends SunshineView> extends BasePresenter<T>
 
                         getMvpView().showError(new LogNetworkError(throwable));
                     }
-                }));
+                }));*/
     }
 }

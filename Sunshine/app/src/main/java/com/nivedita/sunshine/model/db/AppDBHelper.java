@@ -2,15 +2,6 @@ package com.nivedita.sunshine.model.db;
 
 import android.util.Log;
 
-import com.nivedita.sunshine.model.pojo.DaoMaster;
-import com.nivedita.sunshine.model.pojo.DaoSession;
-import com.nivedita.sunshine.model.pojo.Sunshine;
-import com.nivedita.sunshine.model.pojo.Temp;
-import com.nivedita.sunshine.model.pojo.Weather;
-import com.nivedita.sunshine.model.pojo.WeatherList;
-
-import org.greenrobot.greendao.internal.DaoConfig;
-
 import java.util.List;
 import java.util.concurrent.Callable;
 
@@ -24,21 +15,18 @@ import io.reactivex.Flowable;
  */
 
 @Singleton
-public class AppDBHelper implements DBHelper {
+public class AppDBHelper{
 
-    private final DaoSession mDAOSession;
     private static final String TAG = AppDBHelper.class.getSimpleName();
 
     @Inject
     public AppDBHelper(DBOpenHelper dbOpenHelper) {
-        mDAOSession = new DaoMaster(dbOpenHelper.getWritableDb()).newSession();
-        Log.i(TAG, "The session is" + mDAOSession.getSunshineDao());
     }
 
 
-    @Override
+   /* @Override
     public Flowable<Long> persistSunshine(final Sunshine sunshine) {
-        return Flowable.fromCallable(new Callable<Long>() {
+       return Flowable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
                 return mDAOSession.getSunshineDao().insert(sunshine);
@@ -74,7 +62,7 @@ public class AppDBHelper implements DBHelper {
     @Override
     public Flowable<Temp> getTemp() {
         return null;
-    }
+    }*/
 
 
 }

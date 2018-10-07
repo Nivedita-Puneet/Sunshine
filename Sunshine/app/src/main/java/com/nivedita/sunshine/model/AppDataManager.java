@@ -30,16 +30,14 @@ public class AppDataManager implements DataManager {
     private final Context context;
     private final PrefsHelper prefsHelper;
     private final Apihelper apihelper;
-    private final DBHelper dbHelper;
 
     @Inject
     public AppDataManager(@ApplicationContext Context context,
-                          PrefsHelper prefsHelper, Apihelper apihelper, DBHelper dbHelper) {
+                          PrefsHelper prefsHelper, Apihelper apihelper) {
 
         this.context = context;
         this.prefsHelper = prefsHelper;
         this.apihelper = apihelper;
-        this.dbHelper = dbHelper;
     }
 
 
@@ -68,7 +66,7 @@ public class AppDataManager implements DataManager {
 
     }
 
-    @Override
+   /* @Override
     public Flowable<Long> persistSunshine(Sunshine sunshine) {
         return dbHelper.persistSunshine(sunshine);
     }
@@ -91,5 +89,5 @@ public class AppDataManager implements DataManager {
     @Override
     public Flowable<Temp> getTemp() {
         return dbHelper.getTemp();
-    }
+    }*/
 }

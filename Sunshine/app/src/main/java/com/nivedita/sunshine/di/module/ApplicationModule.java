@@ -78,11 +78,6 @@ public class ApplicationModule {
         return ConstantsUtil.DB_NAME;
     }
 
-    @Provides
-    @Singleton
-    DBHelper provideDbHelper(AppDBHelper appDbHelper) {
-        return appDbHelper;
     }
-}
 
 
